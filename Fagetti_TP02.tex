@@ -1,0 +1,59 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[spanish]{babel}
+
+\title{Trabajo Práctico}
+\title{Dispositivos de red - Hubs}
+\author{Nicolás Fagetti}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Conexi\'{o}n de dos dispositivos}
+\textbf{Durante la prueba de conexi\'{o}n de las 2 PCs, pudimos realizar la configuraci\'{o}n de IP correctamente, utilizando el comando ``\texttt{ipconfig}'', asi como el env\'{i}o de PDUs con \'{e}xito, utilizando las herramientas de simulaci\'{o}n provistas por Packet Tracer y el comando ``\texttt{ping}''.} \\
+
+\textbf{A continuaci\'{o}n, ejecutamos el comando ``\texttt{arp -a}'' en cada dispositivo. Al ejecutarlo antes de realizar el env\'{i}o de paquetes, nos mostraba la ausencia de ARPs registrados, mientras que si lo hac\'{i}amos luego del env\'{i}o, nos arrojaba la direcci\'{o}n IP del equipo receptor.} \\
+
+\textbf{Al realizar el mismo ejercicio en un esquema cliente-servidor, nos encontramos que en este caso tambi\'{e}n cada uno registra la direcci\'{o}n IP del equipo con el que tuvo comunicaci\'{o}n. Adicionalmente, en la PC1 notamos que, al ejecutar el comando ``\texttt{ipconfig /all}'' , se registra la direcci\'{o}n IP del servidor en el campo ``DHCP'' y ``DNS''.} \\
+
+\textbf{ A continuaci\'{o}n, mostramos esquem\'{a}ticamente los resultados obtenidos durante el ejercicio: } \\
+
+\begin{tabular}{ | l || c | c || c | c | }
+   \hline
+    & PC01 & PC02 & PC1 & Server \\
+   \hline
+   MAC Nr.	& 0001.431A.1E08 & 0060.2F73.6351 & 000C.CF40.25C8& 0002.17D4.871E \\
+   IP & 192.168.0.1 &	192.168.0.2 & 192.168.0.1 & 192.168.0.100 \\
+   Mascara	& 255.255.255.0 & 255.255.255.0 & 255.255.255.0 & 255.255.255.0\\
+   DHCP & 0.0.0.0 & 0.0.0.0 & 192.168.0.100 & 0.0.0.0 \\
+   DNS	& 0.0.0.0 &	0.0.0.0 & 192.168.0.100 & 192.168.0.100 \\
+   \hline
+\end{tabular}
+
+\newpage
+
+\section{Extendiendo la red}
+\textbf{Una vez conectadas las 3 PCs y el servidor al Hub, hemos podido constatar que, al establecer la configuraci\'{o}n de IP con el modo DHCP, las direcciones IP se establec\'{i}an autom\'{a}ticamente, y la direcci\'{o}n IP del servidor aparece en el campo de ``DHCP Servers'' y ``DNS Servers''.} \\
+
+\textbf{Por otro lado, al ejecutar el comando ``\texttt{ping}'' entre las PCs y el servidor, notamos que tanto emisor como receptor registran la direcci\'{o}n IP de su contraparte, por lo cual no har\'{i}a falta ejecutar el mismo comando desde cada PC hacia las otras. Con que se realice una comunicaci\'{o}n (emitiendo o recibiendo) entre 2 de ellas, la IP de cada una queda registrada en la cache de la otra.} \\
+
+\section{Dominios de colisi\'{o}n}
+\textbf{Luego de crear la red y configurar las IPs de cada dispositivo, se realizaron algunas pruebas de env\'{i}o de paquetes PDU, como por ejemplo:} \\
+
+\begin{enumerate}
+    \item \textbf{ De la PC11 a la Impresora1, y de la PC21 a la Impresora2 (un mensaje dentro de cada subred "Ventas" y "Administracion"). }
+    \item \textbf{ De la PC11 a la Impresora2, y de la PC21 a la Impresora1 (un mensaje de un dispositivo de una subred hacia un dispositivo de la otra). }
+\end{enumerate}
+
+\textbf{ De la simulaci\'{o}n, constatamos que existen colisiones en ambos casos, haciendo fallar la transmisi\'{o}n. Dado que los hubs replican la senal a todos sus puertos, las señales viajan por la totalidad de la red, interfiriendo siempre en el env\'{i}o del emisor o en la respuesta del receptor. } \\
+
+\textbf{ De lo antepuesto, podemos concluir que nos encontramos ante un \'{u}nico dominio de colisi\'{o}n, en virtud de que los hubs extienden el dominio de colisi\'{o}n al resto de sus puertos. }
+
+\newpage
+\section{Referencias}
+\begin{itemize}
+    \item Fuente del documento: https://github.com/moro1982/tp-hubs
+\end{itemize}
+
+\end{document}
